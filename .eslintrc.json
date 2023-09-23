@@ -14,11 +14,12 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": [
       "react",
@@ -37,14 +38,7 @@
         ]
       }
     ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
+    "import/extensions": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": [
       "error"
