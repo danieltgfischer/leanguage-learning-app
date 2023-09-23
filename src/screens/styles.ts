@@ -14,3 +14,9 @@ export const Container = styled.View`
 export const Title = styled.Text`
   color: #b2d8e5;
 `;
+
+export const Sentence = styled.View`
+  flex-direction: row;
+  align-items: baseline;
+  margin: 25px 0 75px;
+`;

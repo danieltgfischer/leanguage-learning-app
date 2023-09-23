@@ -16,12 +16,17 @@ const AppProvider: React.FC<Props> = ({ children }: Props) => {
   const [data, setData] = useState<AppState>({ lessons: [] });
   useEffect(() => {
     const lessons: Lesson[] = [];
-    getDocs(collection(db, 'translations')).then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        lessons.push(doc.data() as Lesson);
+
+    getDocs(collection(db, 'translations'))
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          lessons.push(doc.data() as Lesson);
+        });
+        setData({ lessons });
+      })
+      .catch(error => {
+        console.error(error);
       });
-    });
-    setData({ lessons });
   }, []);
 
   const value = useMemo(() => data, [data]);
