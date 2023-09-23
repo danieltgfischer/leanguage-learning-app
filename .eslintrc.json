@@ -5,6 +5,7 @@
   "extends": [
       "plugin:react/recommended",
       "airbnb",
+      "airbnb-typescript",
       "plugin:@typescript-eslint/recommended",
       "plugin:prettier/recommended"
   ],
@@ -51,7 +52,9 @@
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": "error",
     "react/style-prop-object": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": "off"
   },
   "settings": {
     "import/resolver": {
