@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 type PropStyleType = {
@@ -24,6 +25,17 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   padding: 15px 0;
   border-radius: 25px;
+  ${Platform.select({
+    ios: `
+      shadow-color: #000;
+      shadow-offset: 0px 2px;
+      shadow-opacity: 0.2;
+      shadow-radius: 5px;
+    `,
+    android: `
+      elevation: 5;
+    `,
+  })}
 `;
 
 export const ButtonText = styled.Text`
