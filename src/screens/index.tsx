@@ -1,26 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationButton } from '@/components';
 import { useContext } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { AppContext } from '@/context/AppContext';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import { ControlButton } from '@/components';
+import { Container, Title } from './styles';
 
 export default function App() {
-  const {lessons} = useContext(AppContext);
-  return (
+  const { lessons } = useContext(AppContext);
 
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+  return (
+    <Container>
       <StatusBar style="auto" />
-      <NavigationButton />
-    </View>
+      <Title>Fill in the missing word</Title>
+      <ControlButton title="CONTINUE" />
+    </Container>
   );
 }

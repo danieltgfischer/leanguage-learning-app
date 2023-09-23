@@ -1,13 +1,21 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Button } from './styles';
+import { Button, ButtonText } from './styles';
 
-const NavigationButton: React.FC = () => {
+type Props = {
+  title: string;
+  type?: 'continue' | 'check' | 'success' | 'error';
+};
+
+const ControlButton: React.FC<Props> = ({ title, type }) => {
   return (
-    <Button>
-      <Text>Navigation Button</Text>
+    <Button type={type}>
+      <ButtonText type={type}>{title}</ButtonText>
     </Button>
   );
 };
 
-export default NavigationButton;
+ControlButton.defaultProps = {
+  type: 'continue',
+};
+
+export default ControlButton;

@@ -3,8 +3,8 @@ export type Lesson = {
   extraOptions: string[];
   learningLanguage: string[];
   nativeLanguage: string[];
-}
+};
 
-export type AppState  = {
+export type AppState = {
   lessons: Lesson[];
-}
+};
