@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { AppContext } from '@/context/AppContext';
-import { ControlButton, OptionButton, SentenceWord } from '@/components';
+import { ControlButton, OptionButton, Popup, SentenceWord } from '@/components';
 import { Container, Sentence, Title } from './styles';
 import { getWordsFromKeys } from './utils';
 
