@@ -50,7 +50,8 @@
     ],
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": "error",
-    "react/style-prop-object": "off"
+    "react/style-prop-object": "off",
+    "import/no-extraneous-dependencies": "off"
   },
   "settings": {
     "import/resolver": {
