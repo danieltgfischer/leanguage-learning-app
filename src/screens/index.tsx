@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text } from 'react-native';
 import { AppContext } from '@/context/AppContext';
 import { ControlButton, OptionButton, SentenceWord } from '@/components';
 import { Container, Sentence, Title } from './styles';
+import { getWordsFromKeys } from './utils';
 
 export default function App() {
   const { lessons } = useContext(AppContext);
-  const lesson = lessons[2] ?? [];
-  const phrase = lesson?.nativeLanguage ?? [];
+  const lesson = lessons[0] ?? [];
+  const phrase = getWordsFromKeys(lesson?.sentence ?? {}) ?? [];
 
   return (
     <Container>
@@ -17,9 +17,9 @@ export default function App() {
       <Sentence>
         {phrase.map(word => (
           <SentenceWord
-            word={word}
-            chosenWord={lesson?.chosenWords[0]}
-            key={word}
+            word={word[0]}
+            chosenWord={Object.keys(lesson?.chosenWords)[0]}
+            key={word[0]}
           />
         ))}
       </Sentence>

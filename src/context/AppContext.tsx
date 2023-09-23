@@ -12,16 +12,17 @@ export const AppContext = createContext<AppState>(INITIAL_STATE);
 type Props = {
   children: React.ReactNode;
 };
+
 const AppProvider: React.FC<Props> = ({ children }: Props) => {
   const [data, setData] = useState<AppState>({ lessons: [] });
   useEffect(() => {
     const lessons: Lesson[] = [];
-
     getDocs(collection(db, 'translations'))
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           lessons.push(doc.data() as Lesson);
         });
+        console.log('API', lessons);
         setData({ lessons });
       })
       .catch(error => {

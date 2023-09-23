@@ -1,8 +1,10 @@
+type Map = {
+  [key: string]: string;
+};
 export type Lesson = {
-  chosenWords: string[];
+  chosenWords: Map;
   extraOptions: string[];
-  learningLanguage: string[];
-  nativeLanguage: string[];
+  sentence: Map;
 };
 
 export type AppState = {
