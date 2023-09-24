@@ -1,13 +1,18 @@
 import { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { AppContext } from '@/context/AppContext';
-import { ControlButton, OptionButton, Popup, SentenceWord } from '@/components';
+import {
+  ControlButton,
+  OptionButton,
+  LearningWord,
+  SentenceWord,
+} from '@/components';
 import { Container, Sentence, Title } from './styles';
-import { getWordsFromKeys } from './utils';
+import { getWordsFromKeys } from '../utils';
 
 export default function App() {
   const { lessons } = useContext(AppContext);
-  const lesson = lessons[0] ?? [];
+  const lesson = lessons[1] ?? [];
   const phrase = getWordsFromKeys(lesson?.sentence ?? {}) ?? [];
 
   return (
@@ -20,6 +25,15 @@ export default function App() {
             word={word[0]}
             chosenWord={Object.keys(lesson?.chosenWords)[0]}
             key={word[0]}
+          />
+        ))}
+      </Sentence>
+      <Sentence>
+        {phrase.map(words => (
+          <LearningWord
+            words={words}
+            chosenWords={lesson?.chosenWords ?? {}}
+            key={words[0]}
           />
         ))}
       </Sentence>

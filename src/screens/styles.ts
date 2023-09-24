@@ -18,5 +18,7 @@ export const Title = styled.Text`
 export const Sentence = styled.View`
   flex-direction: row;
   align-items: baseline;
-  margin: 25px 0 75px;
+  margin: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 `;

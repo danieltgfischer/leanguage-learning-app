@@ -1,13 +1,12 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  position: relative;
+  position: absolute;
   background-color: #fff;
-  padding: 2px 15px 5px;
-  border-radius: 5px;
+  border-radius: 8px;
   align-items: center;
-  z-index: 1;
-  margin: 15px;
+  flex-wrap: nowrap;
+  align-self: flex-start;
 `;
 
 export const Arrow = styled.View`
@@ -23,8 +22,9 @@ export const Arrow = styled.View`
   border-top-color: #fff;
 `;
 
-export const Text = styled.Text`
+export const PopupText = styled.Text`
   color: #2d5264;
   font-size: 16px;
   font-weight: 500;
+  padding: 5px 10px;
 `;

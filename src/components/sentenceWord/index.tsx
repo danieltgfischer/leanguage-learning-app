@@ -1,3 +1,4 @@
+import { cleanString } from '@/utils';
 import { Text } from './styles';
 
 type Props = {
@@ -6,7 +7,7 @@ type Props = {
 };
 
 const SentenceWord: React.FC<Props> = ({ chosenWord, word }: Props) => {
-  return <Text chosen={chosenWord === word}>{word}</Text>;
+  return <Text chosen={chosenWord === cleanString(word)}>{word}</Text>;
 };
 
 export default SentenceWord;

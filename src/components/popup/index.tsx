@@ -1,4 +1,5 @@
-import { Arrow, Container, Text } from './styles';
+import { Text } from 'react-native';
+import { Arrow, Container, PopupText } from './styles';
 
 type Props = {
   word: string;
@@ -7,9 +8,10 @@ type Props = {
 
 const Popup: React.FC<Props> = ({ visible, word }: Props) => {
   if (!visible) return null;
+
   return (
     <Container>
-      <Text>{word}</Text>
+      <PopupText>{word}</PopupText>
       <Arrow />
     </Container>
   );
