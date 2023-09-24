@@ -14,6 +14,6 @@ export type AppState = {
   lessons: Lesson[];
   chosenOption: string;
   setChosenOption: Dispatch<SetStateAction<string>>;
-  setVerified: Dispatch<SetStateAction<string>>;
+  setVerified: Dispatch<SetStateAction<boolean>>;
   verified: boolean;
 };

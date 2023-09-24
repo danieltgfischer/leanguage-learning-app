@@ -1,9 +1,10 @@
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 type ContainerProps = {
   success: boolean;
 };
-export const Container = styled.View`
+export const Container = styled(Animated.View)`
   position: absolute;
   background-color: ${({ success }: ContainerProps) =>
     !success ? '#fe7a87' : '#0ae2e8'};
@@ -12,7 +13,6 @@ export const Container = styled.View`
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   align-items: center;
-  bottom: -150px;
   bottom: 0px;
   padding: 15px 0 0;
 `;

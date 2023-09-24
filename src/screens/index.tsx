@@ -22,10 +22,12 @@ type TypeButton = 'continue' | 'check';
 export default function App() {
   const [typeButton, setTypeButton] = useState<TypeButton>('continue');
   const [stepLesson, setStepLesson] = useState(0);
+  const [showResult, setShowResult] = useState(false);
   const { lessons, chosenOption } = useContext(AppContext);
   const lesson = lessons[stepLesson] ?? [];
   const phrase = getWordsFromKeys(lesson?.sentence ?? {}) ?? [];
   const options = (lesson?.extraOptions ?? [])?.concat(lesson?.answer);
+
   const controlButtonLabels = {
     continue: 'CONTINUE',
     check: 'CHECK ANSWER',
@@ -50,6 +52,7 @@ export default function App() {
 
   const handleNextLesson = useCallback(() => {
     if (typeButton === 'check') {
+      setShowResult(true);
       return;
     }
     nextQuestion();
@@ -90,9 +93,11 @@ export default function App() {
         />
       </ControlButtonContainer>
       <Result
-        success={false}
+        success={lesson?.answer === chosenOption}
         answer={lesson?.answer ?? ''}
         nextQuestion={nextQuestion}
+        setShowResult={setShowResult}
+        showResult={showResult}
       />
     </Container>
   );
