@@ -10,11 +10,15 @@ type Props = {
 type StateType = 'option' | 'desabled' | 'success' | 'error' | 'chosen';
 
 const OptionButton: React.FC<Props> = ({ word, onSentance, ...props }) => {
-  const { chosenOption, setChosenOption, verified } = useContext(AppContext);
+  const { chosenOption, setChosenOption, verified, lesson } =
+    useContext(AppContext);
   const [type, setType] = useState<StateType>('option');
 
   useEffect(() => {
     if (onSentance) {
+      if (verified) {
+        setType(lesson.answer === chosenOption ? 'success' : 'error');
+      }
       return;
     }
     if (chosenOption !== '' && chosenOption !== word) {
@@ -22,7 +26,7 @@ const OptionButton: React.FC<Props> = ({ word, onSentance, ...props }) => {
     } else if (chosenOption !== '' && chosenOption === word) {
       setType('chosen');
     }
-  }, [chosenOption, onSentance, type, word]);
+  }, [chosenOption, lesson.answer, onSentance, type, verified, word]);
 
   const onPress = useCallback(() => {
     if (!verified && chosenOption !== '') {
@@ -37,7 +41,7 @@ const OptionButton: React.FC<Props> = ({ word, onSentance, ...props }) => {
       onPress={onPress}
       type={type}
       {...props}
-      disabled={type !== 'option'}
+      disabled={type !== 'option' || verified}
     >
       <ButtonText type={type}>{word}</ButtonText>
     </Button>
