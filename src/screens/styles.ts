@@ -13,12 +13,22 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   color: #b2d8e5;
+  margin: 0 0 20px;
 `;
 
 export const Sentence = styled.View`
   flex-direction: row;
   align-items: baseline;
-  margin: 20px;
+  min-height: 70px;
   flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const ButtonsContainer = styled.View`
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 70%;
+  margin: 40px 0 0;
+  align-items: center;
   justify-content: center;
 `;

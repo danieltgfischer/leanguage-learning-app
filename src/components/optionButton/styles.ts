@@ -18,6 +18,7 @@ const colorsText: { [key: string]: string } = {
   desabled: '#678190',
   success: '#fff',
   error: '#fff',
+  chosen: 'transparent',
 };
 
 export const Button = styled.TouchableOpacity`
@@ -25,6 +26,7 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   padding: 15px;
   border-radius: 12px;
+  margin: 5px;
   ${Platform.select({
     ios: `
       shadow-color: #000;
@@ -35,7 +37,7 @@ export const Button = styled.TouchableOpacity`
     android: `
       elevation: 5;
     `,
-  })}
+  })};
 `;
 
 export const ButtonText = styled.Text`

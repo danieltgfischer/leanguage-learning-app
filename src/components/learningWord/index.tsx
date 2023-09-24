@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   Button,
   Container,
@@ -9,20 +9,30 @@ import {
 } from './styles';
 import Popup from '../popup';
 import { cleanString } from '@/utils';
+import { AppContext } from '@/context/AppContext';
+import OptionButton from '../optionButton';
 
 type Props = {
   words: string[];
   chosenWords: { [key: string]: string };
+  answer: string;
 };
 
 const LearningWord: React.FC<Props> = ({
   words: [nativeWord, learningWord],
   chosenWords,
+  answer,
 }: Props) => {
   const [showPopup, setShowPopup] = useState(false);
+  const { chosenOption } = useContext(AppContext);
 
-  if (chosenWords[cleanString(nativeWord)] === cleanString(learningWord))
+  if (chosenWords[cleanString(nativeWord)] === cleanString(learningWord)) {
+    if (chosenOption !== '') {
+      return <OptionButton word={chosenOption} onSentance />;
+    }
     return <Line />;
+  }
+
   return (
     <Container>
       {showPopup && (
