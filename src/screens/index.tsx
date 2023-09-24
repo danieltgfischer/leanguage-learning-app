@@ -65,7 +65,7 @@ export default function App() {
     }
     nextQuestion();
   }, [nextQuestion, setVerified, typeButton]);
-  console.log(loading);
+
   if (loading) {
     return (
       <Container>
