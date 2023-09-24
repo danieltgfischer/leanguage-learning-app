@@ -7,6 +7,7 @@ import {
   LearningWord,
   SentenceWord,
   ControlButton,
+  Result,
 } from '@/components';
 import {
   ButtonsContainer,
@@ -38,17 +39,21 @@ export default function App() {
     }
   }, [chosenOption]);
 
-  const nextLesson = useCallback(() => {
-    if (typeButton === 'check') {
-      return;
-    }
+  const nextQuestion = useCallback(() => {
     setStepLesson(step => {
       if (step < lessons?.length - 1) {
         return step + 1;
       }
       return 0;
     });
-  }, [lessons?.length, typeButton]);
+  }, [lessons?.length]);
+
+  const handleNextLesson = useCallback(() => {
+    if (typeButton === 'check') {
+      return;
+    }
+    nextQuestion();
+  }, [nextQuestion, typeButton]);
 
   return (
     <Container>
@@ -66,7 +71,6 @@ export default function App() {
       <Sentence>
         {phrase.map(words => (
           <LearningWord
-            answer={lesson?.answer}
             words={words}
             chosenWords={lesson?.chosenWords ?? {}}
             key={Date.now() + Math.random()}
@@ -80,11 +84,16 @@ export default function App() {
       </ButtonsContainer>
       <ControlButtonContainer>
         <ControlButton
-          onPress={nextLesson}
+          onPress={handleNextLesson}
           title={controlButtonLabels[typeButton]}
           type={typeButton}
         />
       </ControlButtonContainer>
+      <Result
+        success={false}
+        answer={lesson?.answer ?? ''}
+        nextQuestion={nextQuestion}
+      />
     </Container>
   );
 }

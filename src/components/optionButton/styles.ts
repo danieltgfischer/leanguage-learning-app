@@ -26,7 +26,7 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   padding: 15px;
   border-radius: 12px;
-  margin: 5px;
+  margin: 5px 15px;
   ${Platform.select({
     ios: `
       shadow-color: #000;

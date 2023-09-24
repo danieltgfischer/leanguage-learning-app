@@ -27,9 +27,9 @@ export const Sentence = styled.View`
 export const ButtonsContainer = styled.View`
   flex-wrap: wrap;
   flex-direction: row;
-  width: 70%;
+  width: 80%;
   margin: 40px 0 0;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
 

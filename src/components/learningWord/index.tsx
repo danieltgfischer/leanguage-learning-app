@@ -15,13 +15,11 @@ import OptionButton from '../optionButton';
 type Props = {
   words: string[];
   chosenWords: { [key: string]: string };
-  answer: string;
 };
 
 const LearningWord: React.FC<Props> = ({
   words: [nativeWord, learningWord],
   chosenWords,
-  answer,
 }: Props) => {
   const [showPopup, setShowPopup] = useState(false);
   const { chosenOption } = useContext(AppContext);
