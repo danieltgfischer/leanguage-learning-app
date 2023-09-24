@@ -4,11 +4,18 @@ import { AppState, Lesson } from './types';
 import { db } from '@/config/firebaseConfig';
 
 const INITIAL_STATE: AppState = {
-  lessons: [],
+  lesson: {
+    chosenWords: {},
+    extraOptions: [],
+    sentence: {},
+    answer: '',
+  },
+  lessonsLength: 0,
   chosenOption: '',
   setChosenOption: () => null,
   setVerified: () => null,
   verified: false,
+  setStepLesson: () => null,
 };
 
 export const AppContext = createContext<AppState>(INITIAL_STATE);
@@ -18,19 +25,23 @@ type Props = {
 };
 
 const AppProvider: React.FC<Props> = ({ children }: Props) => {
-  const [data, setData] = useState<Lesson[]>([]);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
   const [chosenOption, setChosenOption] = useState('');
+  const [stepLesson, setStepLesson] = useState(0);
   const [verified, setVerified] = useState(false);
+  const lesson = useMemo(
+    () => lessons[stepLesson] ?? [],
+    [lessons, stepLesson],
+  );
 
   useEffect(() => {
-    const lessons: Lesson[] = [];
+    const data: Lesson[] = [];
     getDocs(collection(db, 'translations'))
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          lessons.push(doc.data() as Lesson);
+          data.push(doc.data() as Lesson);
         });
-        console.log('API', lessons);
-        setData(lessons);
+        setLessons(data);
       })
       .catch(error => {
         console.error(error);
@@ -39,13 +50,15 @@ const AppProvider: React.FC<Props> = ({ children }: Props) => {
 
   const value = useMemo(
     () => ({
-      lessons: data,
+      lesson,
       chosenOption,
       setChosenOption,
       verified,
       setVerified,
+      setStepLesson,
+      lessonsLength: lessons.length,
     }),
-    [chosenOption, data, verified],
+    [chosenOption, lesson, lessons.length, verified],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

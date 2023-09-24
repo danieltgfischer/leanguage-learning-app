@@ -21,10 +21,10 @@ type TypeButton = 'continue' | 'check';
 
 export default function App() {
   const [typeButton, setTypeButton] = useState<TypeButton>('continue');
-  const [stepLesson, setStepLesson] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const { lessons, chosenOption } = useContext(AppContext);
-  const lesson = lessons[stepLesson] ?? [];
+  const { lesson, chosenOption, setVerified, setStepLesson, lessonsLength } =
+    useContext(AppContext);
+
   const phrase = getWordsFromKeys(lesson?.sentence ?? {}) ?? [];
   const options = (lesson?.extraOptions ?? [])?.concat(lesson?.answer);
 
@@ -43,20 +43,21 @@ export default function App() {
 
   const nextQuestion = useCallback(() => {
     setStepLesson(step => {
-      if (step < lessons?.length - 1) {
+      if (step < lessonsLength - 1) {
         return step + 1;
       }
       return 0;
     });
-  }, [lessons?.length]);
+  }, [lessonsLength, setStepLesson]);
 
   const handleNextLesson = useCallback(() => {
     if (typeButton === 'check') {
+      setVerified(true);
       setShowResult(true);
       return;
     }
     nextQuestion();
-  }, [nextQuestion, typeButton]);
+  }, [nextQuestion, setVerified, typeButton]);
 
   return (
     <Container>

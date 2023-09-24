@@ -11,9 +11,11 @@ export type Lesson = {
 };
 
 export type AppState = {
-  lessons: Lesson[];
+  lesson: Lesson;
+  lessonsLength: number;
   chosenOption: string;
   setChosenOption: Dispatch<SetStateAction<string>>;
   setVerified: Dispatch<SetStateAction<boolean>>;
   verified: boolean;
+  setStepLesson: Dispatch<SetStateAction<number>>;
 };
