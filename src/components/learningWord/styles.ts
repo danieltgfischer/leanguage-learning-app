@@ -29,6 +29,6 @@ export const Line = styled.View`
 
 export const PopupContainer = styled.View`
   position: absolute;
-  left: -80%;
+  left: -20%;
   top: -30px;
 `;

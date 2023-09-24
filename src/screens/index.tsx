@@ -1,15 +1,54 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { AppContext } from '@/context/AppContext';
-import { OptionButton, LearningWord, SentenceWord } from '@/components';
-import { ButtonsContainer, Container, Sentence, Title } from './styles';
 import { getWordsFromKeys } from '../utils';
+import {
+  OptionButton,
+  LearningWord,
+  SentenceWord,
+  ControlButton,
+} from '@/components';
+import {
+  ButtonsContainer,
+  Container,
+  ControlButtonContainer,
+  Sentence,
+  Title,
+} from './styles';
+
+type TypeButton = 'continue' | 'check';
 
 export default function App() {
-  const { lessons } = useContext(AppContext);
-  const lesson = lessons[1] ?? [];
+  const [typeButton, setTypeButton] = useState<TypeButton>('continue');
+  const [stepLesson, setStepLesson] = useState(0);
+  const { lessons, chosenOption } = useContext(AppContext);
+  const lesson = lessons[stepLesson] ?? [];
   const phrase = getWordsFromKeys(lesson?.sentence ?? {}) ?? [];
   const options = (lesson?.extraOptions ?? [])?.concat(lesson?.answer);
+  const controlButtonLabels = {
+    continue: 'CONTINUE',
+    check: 'CHECK ANSWER',
+  };
+
+  useEffect(() => {
+    if (chosenOption !== '') {
+      setTypeButton('check');
+    } else {
+      setTypeButton('continue');
+    }
+  }, [chosenOption]);
+
+  const nextLesson = useCallback(() => {
+    if (typeButton === 'check') {
+      return;
+    }
+    setStepLesson(step => {
+      if (step < lessons?.length - 1) {
+        return step + 1;
+      }
+      return 0;
+    });
+  }, [lessons?.length, typeButton]);
 
   return (
     <Container>
@@ -39,6 +78,13 @@ export default function App() {
           <OptionButton word={word} key={Date.now() + Math.random()} />
         ))}
       </ButtonsContainer>
+      <ControlButtonContainer>
+        <ControlButton
+          onPress={nextLesson}
+          title={controlButtonLabels[typeButton]}
+          type={typeButton}
+        />
+      </ControlButtonContainer>
     </Container>
   );
 }

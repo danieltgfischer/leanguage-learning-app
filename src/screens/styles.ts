@@ -32,3 +32,11 @@ export const ButtonsContainer = styled.View`
   align-items: center;
   justify-content: center;
 `;
+
+export const ControlButtonContainer = styled.View`
+  width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 0 50px;
+`;
