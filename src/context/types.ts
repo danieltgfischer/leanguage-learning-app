@@ -18,4 +18,5 @@ export type AppState = {
   setVerified: Dispatch<SetStateAction<boolean>>;
   verified: boolean;
   setStepLesson: Dispatch<SetStateAction<number>>;
+  loading: boolean;
 };

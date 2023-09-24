@@ -16,6 +16,7 @@ const INITIAL_STATE: AppState = {
   setVerified: () => null,
   verified: false,
   setStepLesson: () => null,
+  loading: false,
 };
 
 export const AppContext = createContext<AppState>(INITIAL_STATE);
@@ -25,6 +26,7 @@ type Props = {
 };
 
 const AppProvider: React.FC<Props> = ({ children }: Props) => {
+  const [loading, setLoading] = useState(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [chosenOption, setChosenOption] = useState('');
   const [stepLesson, setStepLesson] = useState(0);
@@ -36,11 +38,13 @@ const AppProvider: React.FC<Props> = ({ children }: Props) => {
 
   useEffect(() => {
     const data: Lesson[] = [];
+    setLoading(true);
     getDocs(collection(db, 'translations'))
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           data.push(doc.data() as Lesson);
         });
+        setLoading(false);
         setLessons(data);
       })
       .catch(error => {
@@ -57,8 +61,9 @@ const AppProvider: React.FC<Props> = ({ children }: Props) => {
       setVerified,
       setStepLesson,
       lessonsLength: lessons.length,
+      loading,
     }),
-    [chosenOption, lesson, lessons.length, verified],
+    [chosenOption, lesson, lessons.length, loading, verified],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

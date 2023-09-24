@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { ActivityIndicator } from 'react-native';
 import { AppContext } from '@/context/AppContext';
 import { getWordsFromKeys } from '../utils';
 import {
@@ -22,8 +23,14 @@ type TypeButton = 'continue' | 'check';
 export default function App() {
   const [typeButton, setTypeButton] = useState<TypeButton>('continue');
   const [showResult, setShowResult] = useState(false);
-  const { lesson, chosenOption, setVerified, setStepLesson, lessonsLength } =
-    useContext(AppContext);
+  const {
+    lesson,
+    chosenOption,
+    setVerified,
+    setStepLesson,
+    lessonsLength,
+    loading,
+  } = useContext(AppContext);
 
   const phrase = getWordsFromKeys(lesson?.sentence ?? {}) ?? [];
   const options = (lesson?.extraOptions ?? [])?.concat(lesson?.answer);
@@ -58,6 +65,14 @@ export default function App() {
     }
     nextQuestion();
   }, [nextQuestion, setVerified, typeButton]);
+  console.log(loading);
+  if (loading) {
+    return (
+      <Container>
+        <ActivityIndicator size="large" color="#fff" />
+      </Container>
+    );
+  }
 
   return (
     <Container>
